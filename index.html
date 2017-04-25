@@ -80,3 +80,26 @@ $ git checkout gh-pages
     
   </body>
 </html>
+   /**
+     * 给form设定更新人 更新时间
+     * 
+     * @return
+     */
+    public static void setDeleteFlag(Object model, String delFlag) {
+        Class<?> c = model.getClass();
+        Method getter = null;
+        Method setter = null;
+
+        // 创建者
+        try {
+            getter = c.getMethod("getDelFlag");
+            setter = c.getMethod("setDelFlag", String.class);
+            if (getter.invoke(model) == null) {
+                setter.invoke(model, delFlag);
+            }
+        } catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+                | InvocationTargetException e) {
+
+            //e.printStackTrace();
+        }
+    }
